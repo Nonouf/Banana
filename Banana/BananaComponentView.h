@@ -6,7 +6,6 @@
 //  Copyright © 2015 Arnaud Schildknecht. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "BananaComponent.h"
 #import "Banana.h"
 
