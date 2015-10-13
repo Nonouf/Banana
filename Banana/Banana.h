@@ -1,6 +1,6 @@
 //
-//  StrataMenu.h
-//  StrataMenu
+//  Banana.h
+//  Banana
 //
 //  Created by Arnaud Schildknecht on 12/10/2015.
 //  Copyright © 2015 Arnaud Schildknecht. All rights reserved.
@@ -11,19 +11,19 @@
 
 @class Banana;
 
-@protocol StrataMenuDelegate <NSObject>
+@protocol BananaDelegate <NSObject>
 
 @optional
-- (void)bananaWillOpen:(Banana*)strataMenu;
-- (void)bananaDidOpen:(Banana*)strataMenu;
-- (void)bananaWillClose:(Banana*)strataMenu;
-- (void)bananaDidClose:(Banana*)strataMenu;
+- (void)bananaWillOpen:(Banana*)banana;
+- (void)bananaDidOpen:(Banana*)banana;
+- (void)bananaWillClose:(Banana*)banana;
+- (void)bananaDidClose:(Banana*)banana;
 
 @end
 
 @interface Banana : NSObject
 
-@property (nonatomic, weak) id<StrataMenuDelegate>    delegate;
+@property (nonatomic, weak) id<BananaDelegate>    delegate;
 
 @property (nonatomic, readonly, getter=isOpen) BOOL        open;
 
@@ -61,12 +61,12 @@
 @property (strong, nonatomic) UIColor       *highlightedButtonTextColor;
 
 /**
- *  Initialize a StrataMenu object that will contain and manage the menu.
+ *  Initialize a Banana object that will contain and manage the menu.
  *
- *  @param components           An array of StrataMenuComponent, which are the different items display in the menu.
+ *  @param components           An array of BananaComponent, which are the different items display in the menu.
  *  @param navigationController The navigation controller that own the menu.
  *
- *  @return An initialized StrataMenu instance with the given components.
+ *  @return An initialized Banana instance with the given components.
  */
 - (id)initWithComponents:(NSArray*)components andNavigationController:(UINavigationController*)navigationController;
 

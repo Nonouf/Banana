@@ -1,6 +1,6 @@
 //
-//  StrataMenu.m
-//  StrataMenu
+//  Banana.m
+//  Banana
 //
 //  Created by Arnaud Schildknecht on 12/10/2015.
 //  Copyright © 2015 Arnaud Schildknecht. All rights reserved.
@@ -78,7 +78,7 @@
         CGFloat                     componentWidth = _navigationController.navigationBar.frame.size.width;
         CGFloat                     componentHeight = component.view.frame.size.height;
         CGRect                      rect = CGRectMake(xOrigin, yOrigin, componentWidth, componentHeight);
-        BananaComponentView     *componentView = [[BananaComponentView alloc] initWithFrame:rect andComponent:component andStrataMenu:self];
+        BananaComponentView     *componentView = [[BananaComponentView alloc] initWithFrame:rect andComponent:component andBanana:self];
         
         [_componentViews addObject:componentView];
         [_menuView addSubview:componentView];

@@ -1,6 +1,6 @@
 //
-//  StrataMenuComponentView.m
-//  StrataMenu
+//  BananaComponentView.m
+//  Banana
 //
 //  Created by Arnaud Schildknecht on 12/10/2015.
 //  Copyright © 2015 Arnaud Schildknecht. All rights reserved.
@@ -10,7 +10,7 @@
 
 @interface BananaComponentView ()
 
-@property (weak, nonatomic) Banana      *strataMenu;
+@property (weak, nonatomic) Banana      *banana;
 
 @end
 
@@ -27,11 +27,11 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame andComponent:(BananaComponent *)component andStrataMenu:(Banana *)strataMenu {
+- (id)initWithFrame:(CGRect)frame andComponent:(BananaComponent *)component andBanana:(Banana *)banana {
     self = [self initWithFrame:frame andComponent:component];
     
     if (self) {
-        self.strataMenu = strataMenu;
+        self.banana = banana;
     }
     return self;
 }
@@ -47,7 +47,7 @@
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     self.backgroundColor = [UIColor clearColor];
     
-    [_strataMenu toggle];
+    [_banana toggle];
     _component.action(self.component);
 }
 

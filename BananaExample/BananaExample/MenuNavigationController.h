@@ -1,6 +1,6 @@
 //
 //  MenuNavigationController.h
-//  StrataMenu
+//  Banana
 //
 //  Created by Arnaud Schildknecht on 13/10/2015.
 //  Copyright © 2015 Arnaud Schildknecht. All rights reserved.

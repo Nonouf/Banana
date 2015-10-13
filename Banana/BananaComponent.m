@@ -1,6 +1,6 @@
 //
-//  StrataMenuComponent.m
-//  StrataMenu
+//  BananaComponent.m
+//  Banana
 //
 //  Created by Arnaud Schildknecht on 12/10/2015.
 //  Copyright © 2015 Arnaud Schildknecht. All rights reserved.

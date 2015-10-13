@@ -1,6 +1,6 @@
 //
-//  StrataMenuComponentView.h
-//  StrataMenu
+//  BananaComponentView.h
+//  Banana
 //
 //  Created by Arnaud Schildknecht on 12/10/2015.
 //  Copyright © 2015 Arnaud Schildknecht. All rights reserved.
@@ -14,24 +14,24 @@
 @property (strong, nonatomic) BananaComponent   *component;
 
 /**
- *  Initialize a StrataMenuComponentView
+ *  Initialize a BananaComponentView
  *
  *  @param frame     The frame of the view
- *  @param component The StrataMenuComponent linked to the view
+ *  @param component The BananaComponent linked to the view
  *
- *  @return An initialized instance of StrataMenuComponentView.
+ *  @return An initialized instance of BananaComponentView.
  */
 - (id)initWithFrame:(CGRect)frame andComponent:(BananaComponent*)component;
 
 /**
- *  Initialize a StrataMenuComponentView
+ *  Initialize a BananaComponentView
  *
  *  @param frame      The frame of the view
- *  @param component  The StrataMenuComponent linked to the view
- *  @param strataMenu The StrataMenu that own the view
+ *  @param component  The BananaComponent linked to the view
+ *  @param banana     The Banana that own the view
  *
- *  @return An initialized instance of StrataMenuComponentView.
+ *  @return An initialized instance of BananaComponentView.
  */
-- (id)initWithFrame:(CGRect)frame andComponent:(BananaComponent*)component andStrataMenu:(Banana*)strataMenu;
+- (id)initWithFrame:(CGRect)frame andComponent:(BananaComponent*)component andBanana:(Banana*)banana;
 
 @end

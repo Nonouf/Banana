@@ -1,6 +1,6 @@
 //
 //  MenuNavigationController.m
-//  StrataMenu
+//  Banana
 //
 //  Created by Arnaud Schildknecht on 13/10/2015.
 //  Copyright © 2015 Arnaud Schildknecht. All rights reserved.
@@ -13,7 +13,7 @@
 #import <IonIcons.h>
 #import <VBFPopFlatButton.h>
 
-@interface MenuNavigationController () <StrataMenuDelegate>
+@interface MenuNavigationController () <BananaDelegate>
 
 @property (strong, nonatomic) Banana            *menu;
 @property (strong, nonatomic) VBFPopFlatButton      *arrow;
@@ -138,20 +138,20 @@
     [_menu toggle];
 }
 
-#pragma MARK: StrataMenuDelegate
+#pragma MARK: BananaDelegate
 
-- (void)bananaWillOpen:(Banana *)strataMenu {
+- (void)bananaWillOpen:(Banana *)banana {
     [_arrow animateToType:buttonUpBasicType];
 }
 
-- (void)bananaDidOpen:(Banana *)strataMenu {
+- (void)bananaDidOpen:(Banana *)banana {
 }
 
-- (void)bananaWillClose:(Banana *)strataMenu {
+- (void)bananaWillClose:(Banana *)banana {
     [_arrow animateToType:buttonDownBasicType];
 }
 
-- (void)bananaDidClose:(Banana *)strataMenu {
+- (void)bananaDidClose:(Banana *)banana {
 }
 
 @end
