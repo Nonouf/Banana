@@ -1,0 +1,16 @@
+PODS:
+  - ionicons (2.0.2)
+  - pop (1.0.8)
+  - VBFPopFlatButton (0.0.6):
+    - pop
+
+DEPENDENCIES:
+  - ionicons
+  - VBFPopFlatButton
+
+SPEC CHECKSUMS:
+  ionicons: 5062e3d28d955e2f68cf2b11df2e194c5e6c6147
+  pop: bb773ae2c791ca2629de13b347e7a8b450fa6a57
+  VBFPopFlatButton: 782344da63f104c279a857d806e065117a7e1196
+
+COCOAPODS: 0.38.2
