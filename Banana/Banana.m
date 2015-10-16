@@ -13,6 +13,7 @@
 @interface Banana ()
 
 @property (nonatomic, getter=isOpen) BOOL        open;
+@property (nonatomic, getter=isHidden) BOOL      hidden;
 
 @property (weak, nonatomic) UINavigationController  *navigationController;
 @property (strong, nonatomic) UIView                *containerView;
@@ -34,6 +35,7 @@
 
         self.componentViews = [[NSMutableArray alloc] init];
         self.open = NO;
+        self.hidden = NO;
     
         self.separatorHeight = 1.0;
         self.separatorOffset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -78,7 +80,7 @@
         CGFloat                     componentWidth = _navigationController.navigationBar.frame.size.width;
         CGFloat                     componentHeight = component.view.frame.size.height;
         CGRect                      rect = CGRectMake(xOrigin, yOrigin, componentWidth, componentHeight);
-        BananaComponentView     *componentView = [[BananaComponentView alloc] initWithFrame:rect andComponent:component andBanana:self];
+        BananaComponentView         *componentView = [[BananaComponentView alloc] initWithFrame:rect andComponent:component andBanana:self];
         
         [_componentViews addObject:componentView];
         [_menuView addSubview:componentView];
@@ -159,7 +161,7 @@
 - (void)prepare {
     [self initBackgroundView];
     [self addComponentToMenu];
-    CGFloat menuYOrigin = _navigationController.navigationBar.frame.origin.y + _navigationController.navigationBar.frame.size.height + + [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGFloat menuYOrigin = _navigationController.navigationBar.frame.origin.y + _navigationController.navigationBar.frame.size.height /*+ [UIApplication sharedApplication].statusBarFrame.size.height*/;
     CGRect  containerRect = CGRectMake(0, menuYOrigin - [self getMenuViewHeight], _navigationController.view.frame.size.width, [self getMenuViewHeight] + _toggleButton.frame.size.height);
     CGRect  menuRect = CGRectMake(0, 0, _navigationController.view.frame.size.width, [self getMenuViewHeight]);
     
@@ -171,6 +173,9 @@
 }
 
 - (void)open {
+    if ([_delegate respondsToSelector:@selector(bananaWillOpen:)]) {
+        [_delegate performSelector:@selector(bananaWillOpen:) withObject:self];
+    }
     self.open = YES;
 
     [UIView animateWithDuration:_animationDuration / 2
@@ -224,6 +229,10 @@
 }
 
 - (void)close {
+    if ([_delegate respondsToSelector:@selector(bananaWillClose:)]) {
+        [_delegate performSelector:@selector(bananaWillClose:) withObject:self];
+    }
+    
     [UIView animateWithDuration:_animationDuration
                           delay:0.4
                         options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut
@@ -276,23 +285,83 @@
 
 - (void)toggle {
     if (_open) {
-        if ([_delegate respondsToSelector:@selector(bananaWillClose:)]) {
-            [_delegate performSelector:@selector(bananaWillClose:) withObject:self];
-        }
         [self close];
     }
     else {
-        if ([_delegate respondsToSelector:@selector(bananaWillOpen:)]) {
-            [_delegate performSelector:@selector(bananaWillOpen:) withObject:self];
-        }
         [self open];
+    }
+}
+
+- (void)showAnimated:(BOOL)animated {
+    _hidden = NO;
+    
+    if (animated) {
+        if (_open) {
+            _backgroundView.alpha = 1.0;
+        } else {
+            _backgroundView.alpha = 0.0;
+        }
+        _containerView.alpha = 1.0;
+        _containerView.hidden = NO;
+        
+        [UIView animateWithDuration:_animationDuration / 2 animations:^{
+            CGRect   frame = _containerView.frame;
+            
+            frame.origin.y += _toggleButton.frame.size.height;
+            
+            _containerView.frame = frame;
+        }];
+    } else {
+        CGRect   frame = _containerView.frame;
+        
+        frame.origin.y += _toggleButton.frame.size.height;
+        
+        if (_open) {
+            _backgroundView.alpha = 1.0;
+        } else {
+            _backgroundView.alpha = 0.0;
+        }
+        _containerView.frame = frame;
+        _containerView.alpha = 1.0;
+        _containerView.hidden = NO;
+    }
+}
+
+- (void)hideAnimated:(BOOL)animated {
+    _hidden = YES;
+    
+    if (_open) {
+        [self close];
+    }
+    
+    if (animated) {
+        _backgroundView.alpha = 0.0;
+        [UIView animateWithDuration:_animationDuration / 2 animations:^{
+            CGRect   frame = _containerView.frame;
+            
+            frame.origin.y -= _toggleButton.frame.size.height;
+            
+            _containerView.frame = frame;
+        } completion:^(BOOL finished) {
+            _containerView.alpha = 0.0;
+            _containerView.hidden = YES;
+        }];
+    } else {
+        CGRect   frame = _containerView.frame;
+        
+        frame.origin.y -= _toggleButton.frame.size.height;
+        
+        _backgroundView.alpha = 0.0;
+        _containerView.alpha = 0.0;
+        _containerView.hidden = YES;
+        _containerView.frame = frame;
     }
 }
 
 #pragma mark - Utils
 
 - (CGFloat)getNavigationBarTotalHeight {
-    return _navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
+    return _navigationController.navigationBar.frame.size.height /*+ [UIApplication sharedApplication].statusBarFrame.size.height*/;
 }
 
 - (CGFloat)getMenuViewHeight {

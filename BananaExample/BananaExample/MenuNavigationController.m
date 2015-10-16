@@ -138,7 +138,7 @@
     [_menu toggle];
 }
 
-#pragma MARK: BananaDelegate
+#pragma mark - BananaDelegate
 
 - (void)bananaWillOpen:(Banana *)banana {
     [_arrow animateToType:buttonUpBasicType];

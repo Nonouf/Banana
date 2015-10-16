@@ -26,6 +26,7 @@
 @property (nonatomic, weak) id<BananaDelegate>    delegate;
 
 @property (nonatomic, readonly, getter=isOpen) BOOL        open;
+@property (nonatomic, readonly, getter=isHidden) BOOL      hidden;
 
 @property (strong, nonatomic) NSArray           *menuComponents;
 @property (strong, nonatomic) UIView            *backgroundView;
@@ -79,5 +80,8 @@
  *  Open or close the menu. If the menu is opened it will close it. If the menu is closed it will open it.
  */
 - (void)toggle;
+
+- (void)showAnimated:(BOOL)animated;
+- (void)hideAnimated:(BOOL)animated;
 
 @end
