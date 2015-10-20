@@ -161,7 +161,13 @@
 - (void)prepare {
     [self initBackgroundView];
     [self addComponentToMenu];
+    
     CGFloat menuYOrigin = _navigationController.navigationBar.frame.origin.y + _navigationController.navigationBar.frame.size.height /*+ [UIApplication sharedApplication].statusBarFrame.size.height*/;
+    
+    if (_navigationController.navigationBar.translucent) {
+        menuYOrigin += [UIApplication sharedApplication].statusBarFrame.size.height;
+    }
+    
     CGRect  containerRect = CGRectMake(0, menuYOrigin - [self getMenuViewHeight], _navigationController.view.frame.size.width, [self getMenuViewHeight] + _toggleButton.frame.size.height);
     CGRect  menuRect = CGRectMake(0, 0, _navigationController.view.frame.size.width, [self getMenuViewHeight]);
     
@@ -361,7 +367,10 @@
 #pragma mark - Utils
 
 - (CGFloat)getNavigationBarTotalHeight {
-    return _navigationController.navigationBar.frame.size.height /*+ [UIApplication sharedApplication].statusBarFrame.size.height*/;
+    if (_navigationController.navigationBar.translucent) {
+        return _navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
+    }
+    return  _navigationController.navigationBar.frame.size.height;
 }
 
 - (CGFloat)getMenuViewHeight {
