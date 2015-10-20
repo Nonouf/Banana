@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Banana"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A customizable dropdown menu"
   s.homepage     = "https://github.com/Nonouf/Banana"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
